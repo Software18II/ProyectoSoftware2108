@@ -1,0 +1,56 @@
+-- Ing. Willian Zamalloa Paro
+use bdtesis;
+-- tabla de tesis
+drop table if exists tesis;
+create table tesis(
+	id int AUTO_INCREMENT,
+   titulo varchar(50),
+   autores varchar(100),
+	fecha date,
+   PRIMARY KEY(id)  
+)ENGINE=InnoDB;
+-- tabla de autores
+drop table if exists autores;
+create table autores(
+	idalumno int AUTO_INCREMENT,
+	nombres varchar(50),
+	apellidos varchar(50),
+	codigo varchar(10),
+	PRIMARY KEY(idalumno)
+)ENGINE=InnoDB;
+
+-- tabla de prestatarios
+drop table if exists prestatario;
+create table prestatario(
+	id int AUTO_INCREMENT,
+	nombre varchar(50),
+	apellidos varchar(50),
+	dni varchar(10),
+	estado varchar(10),
+	PRIMARY KEY(id)	
+)ENGINE=InnoDB;
+
+-- tabla de pretamos
+drop table if exists prestamo;
+create table prestamo(
+	idprestamo int AUTO_INCREMENT,
+	idtesis int,
+	idprestatario int,
+   fechasalida date,
+	fechaentrada date,
+   PRIMARY KEY(idprestamo),
+	FOREIGN KEY (idtesis) references tesis(id),
+	FOREIGN KEY (idprestatario) references prestatario(id)
+)ENGINE=InnoDB;
+
+-- tabla de registros 
+drop table if exists registro;
+create table registro(
+	id int AUTO_INCREMENT,
+   titulo varchar(50),
+   idautor int,
+   imagen varchar(100),
+   publicacion date,
+   PRIMARY KEY(id),
+   FOREIGN KEY (idautor) references autores(idalumno)
+)ENGINE=InnoDB;
